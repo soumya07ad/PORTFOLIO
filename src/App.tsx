@@ -233,7 +233,7 @@ export function App() {
               title="Toggle Interactive Black Hole Horizon View"
             >
               {cinematicMode ? <Minimize2 className="h-3.5 w-3.5 text-red-400" /> : <Maximize2 className="h-3.5 w-3.5 text-red-400" />}
-              <span className="font-semibold">{cinematicMode ? "Exit Horizon" : "🪐 Horizon"}</span>
+              <span className="font-semibold">{cinematicMode ? "Exit Horizon" : "Horizon"}</span>
             </button>
 
             <a
@@ -267,8 +267,9 @@ export function App() {
             >
               <div className="flex items-center gap-2.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-red-500 animate-ping" />
-                <span className="font-bold tracking-wide">
-                  {cinematicMode ? "EXIT HORIZON VIEW" : "🪐 ENTER HORIZON MODE"}
+                <span className="font-bold tracking-wide flex items-center gap-1.5">
+                  <Maximize2 className="h-3.5 w-3.5 text-red-400" />
+                  {cinematicMode ? "EXIT HORIZON VIEW" : "ENTER HORIZON MODE"}
                 </span>
               </div>
               <span className="text-[10px] bg-red-500/20 px-2 py-0.5 rounded border border-red-500/30">
@@ -353,7 +354,8 @@ export function App() {
                   className="group inline-flex items-center gap-2 rounded-full border border-red-500/50 bg-gradient-to-r from-red-950/80 to-black/80 hover:from-red-900/90 hover:to-neutral-900/90 px-3 sm:px-3.5 py-1 text-[11px] sm:text-xs font-mono text-red-200 backdrop-blur-md shadow-lg shadow-red-950/40 transition-all hover:scale-105 active:scale-95 cursor-pointer"
                   title="Toggle interactive black hole horizon view"
                 >
-                  <span>🪐 Horizon Mode</span>
+                  <Eye className="h-3.5 w-3.5 text-red-400" />
+                  <span>Horizon Mode</span>
                   <span className="text-[10px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded border border-red-500/30 group-hover:bg-red-500 group-hover:text-black transition-colors">
                     Drift &amp; Feed ↗
                   </span>
@@ -405,7 +407,7 @@ export function App() {
                   className="rounded-full border border-red-500/40 bg-red-950/50 hover:bg-red-900/70 text-red-200 px-5 sm:px-6 py-3 sm:py-3.5 text-xs font-mono backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 shadow-lg shadow-red-950/30"
                 >
                   <Maximize2 className="h-3.5 w-3.5 text-red-400" />
-                  <span>🪐 Horizon View</span>
+                  <span>Horizon View</span>
                 </button>
               </div>
 
