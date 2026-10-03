@@ -200,9 +200,9 @@ export function App() {
   return (
     <div className="relative min-h-screen bg-[#030307] text-neutral-100 selection:bg-emerald-500/30 selection:text-emerald-200 font-sans">
       {/* FIXED TOP NAVIGATION BAR - PERSISTS GLOBALLY ON SCROLL */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-xl px-4 py-3.5 sm:px-6 transition-all duration-300">
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-xl px-4 py-3 sm:px-6 transition-all duration-300">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <a href="#" className="flex items-center gap-3 group">
+          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-red-500/15 border border-red-500/30 text-red-400 font-mono font-bold shadow-lg shadow-red-500/10 transition-transform group-hover:scale-105">
               SDA
             </div>
@@ -210,7 +210,7 @@ export function App() {
               <span className="font-display font-bold tracking-tight text-white block text-sm sm:text-base leading-none">
                 Soumyadip DasAdhikari
               </span>
-              <span className="text-[11px] text-neutral-400 font-mono tracking-wider block mt-1 uppercase">
+              <span className="text-[10px] sm:text-[11px] text-neutral-400 font-mono tracking-wider block mt-1 uppercase">
                 AI Systems &amp; Mobile Engineer
               </span>
             </div>
@@ -225,72 +225,98 @@ export function App() {
             <a href="#contact" className="hover:text-red-400 transition-colors">Contact</a>
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
-            {/* Cinematic Mode Toggle Button */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Cinematic Horizon Button - ALWAYS VISIBLE ON MOBILE & DESKTOP */}
             <button
               onClick={() => setCinematicMode(!cinematicMode)}
-              className="rounded-full border border-red-500/30 bg-red-950/40 hover:bg-red-900/50 text-red-300 px-3.5 py-1.5 text-xs font-mono transition-all flex items-center gap-1.5 shadow-md shadow-red-500/10 cursor-pointer"
-              title="Toggle Black Hole Cinematic View"
+              className="rounded-full border border-red-500/40 bg-red-950/60 hover:bg-red-900/70 text-red-200 px-3 sm:px-3.5 py-1.5 text-xs font-mono transition-all flex items-center gap-1.5 shadow-md shadow-red-950/40 cursor-pointer hover:scale-105 active:scale-95"
+              title="Toggle Interactive Black Hole Horizon View"
             >
-              {cinematicMode ? <Minimize2 className="h-3.5 w-3.5" /> : <Maximize2 className="h-3.5 w-3.5" />}
-              <span>{cinematicMode ? "Exit Horizon" : "Cinematic"}</span>
+              {cinematicMode ? <Minimize2 className="h-3.5 w-3.5 text-red-400" /> : <Maximize2 className="h-3.5 w-3.5 text-red-400" />}
+              <span className="font-semibold">{cinematicMode ? "Exit Horizon" : "🪐 Horizon"}</span>
             </button>
 
             <a
               href="#contact"
-              className="rounded-full bg-white hover:bg-neutral-200 text-black px-5 py-1.5 text-xs font-bold transition-all shadow-lg shadow-white/10 cursor-pointer font-body"
+              className="hidden sm:inline-flex rounded-full bg-white hover:bg-neutral-200 text-black px-5 py-1.5 text-xs font-bold transition-all shadow-lg shadow-white/10 cursor-pointer font-body"
             >
               Hire Me
             </a>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-neutral-400 hover:text-white"
-            aria-label="Toggle Navigation"
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6 text-red-400" /> : <Menu className="h-6 w-6 text-red-400" />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-neutral-300 hover:text-white"
+              aria-label="Toggle Navigation"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6 text-red-400" /> : <Menu className="h-6 w-6 text-red-400" />}
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Dropdown */}
+        {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/10 bg-[#09090e]/95 px-5 py-5 space-y-3 mt-3 rounded-2xl font-body">
+          <div className="md:hidden border-t border-white/10 bg-[#09090e]/98 backdrop-blur-2xl px-5 py-5 space-y-3 mt-3 rounded-2xl font-body shadow-2xl">
+            {/* Horizon Mode Banner Card inside mobile menu */}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false)
+                setCinematicMode(!cinematicMode)
+              }}
+              className="w-full flex items-center justify-between rounded-xl bg-gradient-to-r from-red-950/80 via-red-900/40 to-black/80 border border-red-500/50 p-3 text-left text-xs font-mono text-red-200 shadow-lg shadow-red-950/30"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-500 animate-ping" />
+                <span className="font-bold tracking-wide">
+                  {cinematicMode ? "EXIT HORIZON VIEW" : "🪐 ENTER HORIZON MODE"}
+                </span>
+              </div>
+              <span className="text-[10px] bg-red-500/20 px-2 py-0.5 rounded border border-red-500/30">
+                {cinematicMode ? "Restore UI" : "Fullscreen Black Hole"}
+              </span>
+            </button>
+
             <a
               href="#about"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm text-neutral-300 hover:text-red-400"
+              className="block text-sm text-neutral-300 hover:text-red-400 py-1"
             >
               About Systems
             </a>
             <a
               href="#projects"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm text-neutral-300 hover:text-red-400"
+              className="block text-sm text-neutral-300 hover:text-red-400 py-1"
             >
               Projects
             </a>
             <a
               href="#contributions"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm text-neutral-300 hover:text-red-400"
+              className="block text-sm text-neutral-300 hover:text-red-400 py-1"
             >
               Skyline Activity
             </a>
             <a
               href="#arsenal"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm text-neutral-300 hover:text-red-400"
+              className="block text-sm text-neutral-300 hover:text-red-400 py-1"
             >
               Technical Arsenal
             </a>
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm text-neutral-300 hover:text-red-400"
+              className="block text-sm text-neutral-300 hover:text-red-400 py-1"
             >
               Contact
+            </a>
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-center rounded-xl bg-white text-black py-2.5 text-xs font-bold font-body shadow-md"
+            >
+              Hire Me
             </a>
           </div>
         )}
@@ -303,21 +329,35 @@ export function App() {
         interactive={true}
         className="w-full relative flex flex-col justify-between"
       >
-        <div className="relative flex flex-col justify-between h-full w-full pointer-events-none pt-20">
+        <div className="relative flex flex-col justify-between h-full w-full pointer-events-none pt-16 sm:pt-20">
           {/* Spacer for fixed top navbar */}
-          <div className="h-4 w-full" />
+          <div className="h-2 w-full" />
 
           {/* CENTER HERO CONTENT: SOPHISTICATED OPEN CINEMATIC SHOWCASE */}
-          <div className="relative flex flex-col justify-center items-center text-center px-4 max-w-5xl mx-auto my-auto py-6 z-20">
+          <div className="relative flex flex-col justify-center items-center text-center px-4 max-w-5xl mx-auto my-auto py-4 sm:py-6 z-20">
             <div
               className={`w-full max-w-4xl flex flex-col items-center transition-all duration-500 ${
                 cinematicMode ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
               }`}
             >
-              {/* Status pill badge with pulsing beacon */}
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-red-500/30 bg-black/60 px-4 py-1.5 text-xs font-mono text-red-300 mb-5 backdrop-blur-md shadow-lg shadow-red-950/40">
-                <span className="h-2 w-2 rounded-full bg-red-500 animate-ping" />
-                <span className="tracking-widest uppercase font-medium">AI SYSTEMS &amp; ANDROID ARCHITECT</span>
+              {/* Status & Horizon Discovery Badges */}
+              <div className="flex flex-wrap items-center justify-center gap-2 mb-4 pointer-events-auto">
+                <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-black/60 px-3 sm:px-3.5 py-1 text-[11px] sm:text-xs font-mono text-red-300 backdrop-blur-md shadow-md">
+                  <span className="h-2 w-2 rounded-full bg-red-500 animate-ping" />
+                  <span className="tracking-wide uppercase font-medium">AI SYSTEMS &amp; ANDROID ARCHITECT</span>
+                </div>
+
+                {/* Prominent Horizon Discovery Pill */}
+                <button
+                  onClick={() => setCinematicMode(true)}
+                  className="group inline-flex items-center gap-2 rounded-full border border-red-500/50 bg-gradient-to-r from-red-950/80 to-black/80 hover:from-red-900/90 hover:to-neutral-900/90 px-3 sm:px-3.5 py-1 text-[11px] sm:text-xs font-mono text-red-200 backdrop-blur-md shadow-lg shadow-red-950/40 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                  title="Toggle interactive black hole horizon view"
+                >
+                  <span>🪐 Horizon Mode</span>
+                  <span className="text-[10px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded border border-red-500/30 group-hover:bg-red-500 group-hover:text-black transition-colors">
+                    Drift &amp; Feed ↗
+                  </span>
+                </button>
               </div>
 
               {/* Master Headline: Prominent Soumyadip DasAdhikari */}
@@ -328,48 +368,49 @@ export function App() {
               </h1>
 
               {/* Core Tagline with warm gradient emphasis */}
-              <p className="mt-4 font-body text-xl sm:text-2xl md:text-3xl font-light text-neutral-200 tracking-tight drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)]">
-                Building <span className="text-white font-medium underline decoration-red-500/60 underline-offset-8">Future-Ready AI Systems</span> &amp; <span className="text-white font-medium underline decoration-red-500/60 underline-offset-8">Kotlin Architectures</span>
+              <p className="mt-3 sm:mt-4 font-body text-base sm:text-xl md:text-2xl font-light text-neutral-200 tracking-tight drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)] px-2">
+                Building <span className="text-white font-medium underline decoration-red-500/60 underline-offset-4 sm:underline-offset-8">Future-Ready AI Systems</span> &amp; <span className="text-white font-medium underline decoration-red-500/60 underline-offset-4 sm:underline-offset-8">Kotlin Architectures</span>
               </p>
 
               {/* Concise, impactful bio */}
-              <p className="mt-5 max-w-xl mx-auto font-body text-sm sm:text-base text-neutral-300 leading-relaxed drop-shadow-[0_2px_15px_rgba(0,0,0,0.95)]">
+              <p className="mt-3 sm:mt-5 max-w-xl mx-auto font-body text-xs sm:text-sm md:text-base text-neutral-300 leading-relaxed drop-shadow-[0_2px_15px_rgba(0,0,0,0.95)] px-3">
                 Crafting scalable autonomous agent pipelines, low-latency edge streaming gateways, and high-performance reactive Android experiences.
               </p>
 
               {/* Architecture tags as translucent floating pills */}
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs font-mono text-neutral-300">
-                <span className="px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">Jetpack Compose</span>
-                <span className="px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">Multi-Agent</span>
-                <span className="px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">SSE Streaming</span>
-                <span className="px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">Google ML Kit</span>
-                <span className="px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">Coroutines &amp; Flow</span>
+              <div className="mt-4 sm:mt-6 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-mono text-neutral-300 px-2">
+                <span className="px-2.5 sm:px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">Jetpack Compose</span>
+                <span className="px-2.5 sm:px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">Multi-Agent</span>
+                <span className="px-2.5 sm:px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">SSE Streaming</span>
+                <span className="px-2.5 sm:px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">Google ML Kit</span>
+                <span className="px-2.5 sm:px-3 py-1 rounded-full bg-black/65 border border-white/15 backdrop-blur-md shadow-md">Coroutines &amp; Flow</span>
               </div>
 
               {/* CTA action buttons */}
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-4 pointer-events-auto">
+              <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 pointer-events-auto">
                 <a
                   href="#projects"
-                  className="rounded-full bg-white hover:bg-neutral-200 text-black px-8 py-3.5 font-bold text-sm transition-all duration-300 shadow-[0_0_35px_rgba(255,255,255,0.25)] hover:scale-105 cursor-pointer"
+                  className="rounded-full bg-white hover:bg-neutral-200 text-black px-6 sm:px-8 py-3 sm:py-3.5 font-bold text-xs sm:text-sm transition-all duration-300 shadow-[0_0_35px_rgba(255,255,255,0.25)] hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   Explore Projects
                 </a>
                 <a
                   href="#contact"
-                  className="rounded-full border border-white/20 bg-black/70 hover:bg-white/10 px-8 py-3.5 font-medium text-sm text-white backdrop-blur-md transition-all duration-300 hover:border-red-400/50 hover:scale-105 cursor-pointer"
+                  className="rounded-full border border-white/20 bg-black/70 hover:bg-white/10 px-6 sm:px-8 py-3 sm:py-3.5 font-medium text-xs sm:text-sm text-white backdrop-blur-md transition-all duration-300 hover:border-red-400/50 hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   Get In Touch
                 </a>
-                <a
-                  href="#contributions"
-                  className="rounded-full border border-white/15 bg-black/70 hover:bg-white/10 px-6 py-3.5 text-xs font-mono text-neutral-300 backdrop-blur-md transition-all hover:text-white hover:border-white/30"
+                <button
+                  onClick={() => setCinematicMode(true)}
+                  className="rounded-full border border-red-500/40 bg-red-950/50 hover:bg-red-900/70 text-red-200 px-5 sm:px-6 py-3 sm:py-3.5 text-xs font-mono backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2 shadow-lg shadow-red-950/30"
                 >
-                  3D Activity Skyline →
-                </a>
+                  <Maximize2 className="h-3.5 w-3.5 text-red-400" />
+                  <span>🪐 Horizon View</span>
+                </button>
               </div>
 
               {/* Quick social links in sleek pill dock */}
-              <div className="mt-8 inline-flex items-center gap-4 bg-black/70 border border-white/15 backdrop-blur-md rounded-full px-5 py-2 text-neutral-300 pointer-events-auto shadow-lg shadow-black/50">
+              <div className="mt-6 sm:mt-8 inline-flex items-center gap-4 bg-black/70 border border-white/15 backdrop-blur-md rounded-full px-5 py-2 text-neutral-300 pointer-events-auto shadow-lg shadow-black/50">
                 <a
                   href="https://github.com/soumya07ad"
                   target="_blank"
@@ -412,22 +453,22 @@ export function App() {
           </div>
 
           {/* BOTTOM HORIZON STATUS & INTERACTION HINT (Image 2 style) */}
-          <div className="w-full px-6 py-5 flex items-end justify-between z-20">
+          <div className="w-full px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-3 z-20">
             {/* Bottom-left: Exact "Nothing escapes the horizon" tagline from Image 2 */}
-            <div className="pointer-events-none select-none text-left">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-white tracking-tight">
+            <div className="pointer-events-none select-none text-center sm:text-left">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-light text-white tracking-tight">
                 Nothing <span className="font-serif italic text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.7)]">escapes</span> the horizon.
               </h2>
-              <p className="mt-1 text-[11px] font-mono tracking-widest text-neutral-400 uppercase">
+              <p className="mt-1 text-[10px] sm:text-[11px] font-mono tracking-widest text-neutral-400 uppercase">
                 MOVE TO DRIFT &middot; HOLD TO FEED IT
               </p>
             </div>
 
             {/* Bottom-right: Scroll indicator to jump into systems */}
-            <div className="hidden sm:flex pointer-events-auto">
+            <div className="flex pointer-events-auto">
               <a
                 href="#about"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-4 py-2 text-xs font-mono text-neutral-300 hover:text-emerald-400 hover:border-emerald-500/40 backdrop-blur-md transition-all"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono text-neutral-300 hover:text-red-400 hover:border-red-500/40 backdrop-blur-md transition-all"
               >
                 <span>Scroll down</span>
                 <span className="animate-bounce">↓</span>
@@ -436,6 +477,24 @@ export function App() {
           </div>
         </div>
       </EtchedAccretion>
+
+      {/* FLOATING HORIZON CONTROLLER (Visible when in Cinematic Horizon Mode) */}
+      {cinematicMode && (
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 rounded-full border border-red-500/50 bg-black/90 backdrop-blur-2xl px-5 py-2.5 shadow-[0_0_45px_rgba(239,68,68,0.5)] pointer-events-auto">
+          <div className="flex items-center gap-2 text-xs font-mono text-red-200">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-500 animate-ping" />
+            <span className="font-bold">HORIZON MODE ACTIVE</span>
+            <span className="text-neutral-400 hidden sm:inline">· Move/Swipe to Drift · Hold to Feed</span>
+          </div>
+          <button
+            onClick={() => setCinematicMode(false)}
+            className="rounded-full bg-red-600 hover:bg-red-500 text-white px-4 py-1 text-xs font-bold font-mono transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-md flex items-center gap-1.5"
+          >
+            <Minimize2 className="h-3.5 w-3.5" />
+            <span>Exit Horizon</span>
+          </button>
+        </div>
+      )}
 
       {/* 4. AI ARCHITECTURE & SYSTEM TELEMETRY HUD (Replacing personal photo) */}
       <section id="about" className="relative py-20 px-4 sm:px-6 max-w-6xl mx-auto">
