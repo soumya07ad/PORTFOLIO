@@ -226,15 +226,6 @@ export function App() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Cinematic Horizon Button - ALWAYS VISIBLE ON MOBILE & DESKTOP */}
-            <button
-              onClick={() => setCinematicMode(!cinematicMode)}
-              className="rounded-full border border-red-500/40 bg-red-950/60 hover:bg-red-900/70 text-red-200 px-3 sm:px-3.5 py-1.5 text-xs font-mono transition-all flex items-center gap-1.5 shadow-md shadow-red-950/40 cursor-pointer hover:scale-105 active:scale-95"
-              title="Toggle Interactive Black Hole Horizon View"
-            >
-              {cinematicMode ? <Minimize2 className="h-3.5 w-3.5 text-red-400" /> : <Maximize2 className="h-3.5 w-3.5 text-red-400" />}
-              <span className="font-semibold">{cinematicMode ? "Exit Horizon" : "Horizon"}</span>
-            </button>
 
             <a
               href="#contact"
