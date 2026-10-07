@@ -176,24 +176,21 @@ export function App() {
     }
 
     setFormStatus("loading")
+    
+    // Simulate a brief loading state for UX
+    await new Promise((resolve) => setTimeout(resolve, 800))
+    
     try {
-      const response = await fetch("https://soumya2025.pythonanywhere.com/api/feedback/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
-
-      if (response.ok) {
-        setFormStatus("success")
-        setStatusMessage("Transmission confirmed! Your message has been received.")
-        setFormData({ name: "", email: "", message: "" })
-      } else {
-        setFormStatus("error")
-        setStatusMessage("Server busy. Please email directly at adhikarisoumya7@gmail.com")
-      }
+      const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`)
+      const body = encodeURIComponent(`${formData.message}\n\n---\nSender Email: ${formData.email}`)
+      window.location.href = `mailto:adhikarisoumya7@gmail.com?subject=${subject}&body=${body}`
+      
+      setFormStatus("success")
+      setStatusMessage("Mail client opened! Please send the email to complete the transmission.")
+      setFormData({ name: "", email: "", message: "" })
     } catch {
       setFormStatus("error")
-      setStatusMessage("Network error. Please reach out to adhikarisoumya7@gmail.com")
+      setStatusMessage("Could not open mail client. Please email directly at adhikarisoumya7@gmail.com")
     }
   }
 
@@ -355,7 +352,7 @@ export function App() {
 
               {/* Master Headline: Prominent Soumyadip DasAdhikari */}
               <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] drop-shadow-[0_12px_40px_rgba(0,0,0,0.95)]">
-                <span className="bg-gradient-to-b from-white via-neutral-100 to-neutral-400 bg-clip-text text-transparent">
+                <span className="text-white">
                   Soumyadip DasAdhikari
                 </span>
               </h1>
@@ -461,10 +458,10 @@ export function App() {
             <div className="flex pointer-events-auto">
               <a
                 href="#about"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono text-neutral-300 hover:text-red-400 hover:border-red-500/40 backdrop-blur-md transition-all"
+                className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono text-neutral-300 hover:text-red-400 hover:border-red-500/40 backdrop-blur-md transition-all"
               >
                 <span>Scroll down</span>
-                <span className="animate-bounce">↓</span>
+                <span className="transition-transform duration-500 ease-out group-hover:translate-y-1">↓</span>
               </a>
             </div>
           </div>
@@ -680,6 +677,10 @@ export function App() {
             </h2>
             <p className="text-neutral-400 mt-2 text-sm font-body">
               Inquire regarding AI Agent deployment, mobile systems, or enterprise platform collaboration.
+              <br />
+              <span className="mt-4 block text-neutral-300 font-mono text-xs sm:text-sm">
+                Direct Mail: <a href="mailto:adhikarisoumya7@gmail.com" className="text-amber-400 hover:text-amber-300 hover:underline transition-colors">adhikarisoumya7@gmail.com</a>
+              </span>
             </p>
           </div>
 
